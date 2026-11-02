@@ -1,3 +1,4 @@
+![ci](https://github.com/tranphat1506/learn_cicd/actions/workflows/ci.yml/badge.svg)
 # model-api — scaffold cho capstone CI/CD
 
 Service nhỏ (scikit-learn + FastAPI) để học **CI/CD cho software và model**. Model ở đây
