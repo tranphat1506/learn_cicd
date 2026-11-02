@@ -1,0 +1,44 @@
+# Run only what you need:
+#   docker compose --profile app up --build       # api on :8000
+#   docker compose --profile ml up                # mlflow on :5000
+# This keeps <= 2 containers alive on a 9GB laptop.
+
+services:
+  api:
+    profiles: ["app"]
+    build:
+      context: .
+    image: model-api:local
+    ports:
+      - "8000:8000"
+    environment:
+      MODEL_PATH: /srv/model/artifacts/model.pkl
+    mem_limit: 400m
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - import sys,urllib.request; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=2).status == 200 else 1)
+      interval: 15s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+
+  mlflow:
+    profiles: ["ml"]
+    image: ghcr.io/mlflow/mlflow:latest
+    command:
+      - mlflow
+      - server
+      - --backend-store-uri
+      - sqlite:////mlflow/mlflow.db
+      - --default-artifact-root
+      - /mlflow/artifacts
+      - --host
+      - 0.0.0.0
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./mlflow:/mlflow
+    mem_limit: 700m

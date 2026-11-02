@@ -1,0 +1,6 @@
+{
+  "min_accuracy": 0.9,
+  "max_accuracy_drop": 0.02,
+  "min_macro_f1": 0.9,
+  "max_p95_latency_ms": 200
+}

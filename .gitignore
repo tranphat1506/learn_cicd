@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# model artifacts are produced by `make seed` (and later versioned with DVC)
+model/artifacts/*.pkl
+model/reports/
+mlflow/
+.env
+
+# keep these committed
+!model/baseline.json
+!model/gate.json

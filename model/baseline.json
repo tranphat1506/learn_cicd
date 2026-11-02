@@ -1,0 +1,7 @@
+{
+  "accuracy": 0.9333333333333333,
+  "macro_f1": 0.9332591768631814,
+  "p95_latency_ms": 0.17,
+  "golden_rows": 45.0,
+  "model_version": "0.1.0"
+}
